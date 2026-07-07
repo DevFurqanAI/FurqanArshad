@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Muhammad Furqan Arshad — Portfolio
 
-## Getting Started
+Personal portfolio site built to showcase my work as a Computer Science undergraduate and full-stack developer, designed and built from scratch with a focus on distinctive motion and interaction rather than a templated layout.
 
-First, run the development server:
+**Live site:** _https://furqanarshad.vercel.app/_
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Overview
+
+A single-page portfolio covering Home, About, Skills, Projects, Experience, Education, and Contact, with a dark-first, technical/engineered visual identity built around a custom motion system, section-aware navigation, and interactive project cards.
+
+## Tech Stack
+
+- **Framework:** Next.js (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Animation:** Framer Motion
+- **Smooth scrolling:** Lenis
+- **Icons:** React Icons
+- **Deployment:** Vercel
+
+## Key Features
+
+- **Custom section-aware scrollbar** — replaces the native scrollbar with a tick-mark navigator that tracks scroll progress and highlights the active section, synced to smooth scrolling via Lenis
+- **Interactive project cards** — 3D cursor-tilt effect on hover, respecting `prefers-reduced-motion`
+- **Animated background network** — an ambient, self-reorganizing node network in the Hero section that responds to cursor proximity
+- **Instant in-page navigation** — header links jump immediately to sections, independent of the scrollbar's smooth-scroll behavior
+- **Light/dark theme toggle** — persisted across visits, with no flash of incorrect theme on load
+- **Accessible by design** — skip-to-content link, visible focus states, reduced-motion support throughout
+
+## Project Structure
+
+```
+src/
+├── app/                  # App Router pages, layout, and metadata
+├── components/
+│   ├── layout/           # Header, Footer
+│   ├── sections/         # Home, About, Skills, Projects, Experience, Education, Contact
+│   ├── motion/           # Reusable animated primitives (tilt cards, node network, etc.)
+│   └── providers/        # Theme and smooth-scroll context providers
+├── lib/                  # Shared data, animation/motion config, section metadata
+└── types/                # Shared TypeScript types
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Running Locally
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+git clone https://github.com/DevFurqanAI/FurqanArshad.git
+cd FurqanArshad
+npm install
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Then open [http://localhost:3000](http://localhost:3000).
 
-## Learn More
+## Building for Production
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+npm start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contact
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Email:** _(see Contact section on the live site)_
+- **LinkedIn / GitHub:** _(see Contact section on the live site)_
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Built and designed independently by Muhammad Furqan Arshad.

@@ -8,6 +8,7 @@ import { EASE_EXPO_OUT } from "@/lib/animations";
 import { useTheme } from "@/components/providers/theme-provider";
 import { sections } from "@/lib/sections";
 import { getLenis } from "@/components/providers/smooth-scroll-provider";
+import Image from "next/image";
 
 const navItems = sections
   .filter((s) => s.id !== "home")
@@ -39,12 +40,22 @@ export function Header() {
     <header className="border-border-hairline bg-background/80 sticky top-0 z-50 border-b backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         <a
-          href="#home"
-          onClick={(e) => jumpTo(e, "#home")}
-          className="text-fg-primary font-mono text-sm font-semibold tracking-[0.2em]"
-        >
-          M. FURQAN ARSHAD
-        </a>
+            href="#home"
+            onClick={(e) => jumpTo(e, "#home")}
+            className="flex items-center gap-2.5"
+          >
+            <Image
+              src="/fa-mark.png"
+              alt="FA logo mark"
+              width={40}
+              height={40}
+              className="h-10 w-auto"
+              priority
+            />
+            <span className="text-fg-primary font-mono text-sm font-semibold tracking-[0.2em]">
+              M. FURQAN ARSHAD
+            </span>
+          </a>
 
         <nav className="hidden items-center gap-8 md:flex">
           {navItems.map((item) => (
