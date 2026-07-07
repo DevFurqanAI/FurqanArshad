@@ -70,7 +70,7 @@ export function Hero() {
       />
       <div
         aria-hidden
-        className="bg-brand pointer-events-none absolute top-1/4 left-1/2 -z-10 h-[32rem] w-[32rem] -translate-x-1/2 rounded-full opacity-[0.07] blur-[120px]"
+        className="bg-brand pointer-events-none absolute top-1/4 left-1/2 -z-10 h-128 w-lg -translate-x-1/2 rounded-full opacity-[0.07] blur-[120px]"
       />
 
       <motion.div

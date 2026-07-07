@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { fadeUp, staggerContainer, scrollViewport } from "@/lib/animations";
+import { TextReveal } from "@/components/motion/TextReveal";
 
 const pillars = [
   {
@@ -36,12 +37,12 @@ export function About() {
         >
           About
         </motion.p>
-        <motion.h2
-          variants={fadeUp}
+
+        <TextReveal
+          as="h2"
+          text="A Computer Science student who'd rather build the hard part first."
           className="text-fg-primary max-w-3xl text-3xl leading-tight font-bold tracking-tight sm:text-4xl"
-        >
-          A Computer Science student who&apos;d rather build the hard part first.
-        </motion.h2>
+        />
 
         <div className="border-border-hairline mt-16 grid gap-px overflow-hidden rounded-2xl border sm:grid-cols-3">
           {pillars.map((pillar) => (

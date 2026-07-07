@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { contact, socials } from "@/lib/data";
 import { getIcon } from "@/lib/icons";
 import { fadeUp, staggerContainer, scrollViewport } from "@/lib/animations";
+import { TextReveal } from "@/components/motion/TextReveal";
 
 const Mail = getIcon("mail");
 const Phone = getIcon("phone");
@@ -43,12 +44,13 @@ export function Contact() {
           >
             Contact
           </motion.p>
-          <motion.h2
-            variants={fadeUp}
+
+          <TextReveal
+            as="h2"
+            text="Let's build something together"
             className="text-fg-primary max-w-2xl text-3xl leading-tight font-bold tracking-tight sm:text-4xl"
-          >
-            Let&apos;s build something together
-          </motion.h2>
+          />
+
           <motion.p
             variants={fadeUp}
             className="text-fg-secondary mt-4 max-w-xl text-base leading-7"

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { experience } from "@/lib/data";
 import { getIcon } from "@/lib/icons";
 import { fadeUp, staggerContainer, scrollViewport } from "@/lib/animations";
+import { TextReveal } from "@/components/motion/TextReveal";
 
 export function Experience() {
   return (
@@ -24,19 +25,19 @@ export function Experience() {
           >
             Experience
           </motion.p>
-          <motion.h2
-            variants={fadeUp}
+
+          <TextReveal
+            as="h2"
+            text="Academic development and community leadership"
             className="text-fg-primary max-w-2xl text-3xl leading-tight font-bold tracking-tight sm:text-4xl"
-          >
-            Academic development and community leadership
-          </motion.h2>
+          />
 
           <div className="border-border-hairline relative mt-14 space-y-12 border-l pl-8 sm:pl-10">
             {experience.map((item) => {
               const Icon = getIcon(item.iconKey);
               return (
                 <motion.div key={item.role} variants={fadeUp} className="relative">
-                  <div className="bg-brand text-brand-foreground absolute top-0.5 -left-[calc(2rem+9px)] flex h-9 w-9 items-center justify-center rounded-full sm:-left-[calc(2.5rem+9px)]">
+                  <div className="bg-brand text-brand-foreground absolute top-0.5 -left-10.25 flex h-9 w-9 items-center justify-center rounded-full sm:-left-12.25">
                     <Icon className="h-4 w-4" />
                   </div>
 

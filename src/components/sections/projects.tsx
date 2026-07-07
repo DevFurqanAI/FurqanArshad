@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { projects } from "@/lib/data";
 import { fadeUp, staggerContainer, scrollViewport } from "@/lib/animations";
+import { TextReveal } from "@/components/motion/TextReveal";
 import { FeaturedProject } from "./featured-project";
 import { ProjectCard } from "./project-card";
 
@@ -28,12 +29,12 @@ export function Projects() {
           >
             Projects
           </motion.p>
-          <motion.h2
-            variants={fadeUp}
+
+          <TextReveal
+            as="h2"
+            text="Selected work across the stack"
             className="text-fg-primary max-w-2xl text-3xl leading-tight font-bold tracking-tight sm:text-4xl"
-          >
-            Selected work across the stack
-          </motion.h2>
+          />
 
           {featured && (
             <motion.div variants={fadeUp} className="mt-14">
