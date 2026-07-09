@@ -113,9 +113,21 @@ export function Education() {
                     <span className="text-fg-tertiary font-mono pt-0.5 text-xs">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className="text-fg-secondary text-sm leading-6">
-                      {cert.title}
-                    </span>
+                    <div>
+                      <span className="text-fg-secondary text-sm leading-6">
+                        {cert.title}
+                      </span>
+                      {cert.verifyUrl && (
+                        <a
+                          href={cert.verifyUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-brand hover:underline mt-1 block font-mono text-xs"
+                        >
+                          Verify →
+                        </a>
+                      )}
+                    </div>
                   </div>
                   <span className="text-brand font-mono shrink-0 text-xs">
                     {cert.issuer}

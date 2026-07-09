@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { personal, contact, projects, education } from "@/lib/data";
+import { personal, contact } from "@/lib/data";
 import { getIcon } from "@/lib/icons";
 import { EASE_EXPO_OUT } from "@/lib/animations";
 import { NodeNetwork } from "@/components/motion/NodeNetwork";
@@ -51,12 +51,6 @@ function RevealWords({ text, className }: { text: string; className?: string }) 
     </span>
   );
 }
-
-const stats = [
-  { value: String(projects.length), label: "shipped projects" },
-  { value: education.cgpa.split(" / ")[0], label: "CGPA" },
-  { value: "MERN", label: "primary stack" },
-];
 
 export function Hero() {
   function scrollToAbout(e: React.MouseEvent<HTMLAnchorElement>) {
@@ -158,22 +152,6 @@ export function Hero() {
             Download CV
             <Download className="h-4 w-4" />
           </a>
-        </motion.div>
-
-        <motion.div
-          variants={fadeUp}
-          className="border-border-hairline mt-14 flex max-w-md flex-wrap gap-x-10 gap-y-4 border-t pt-6"
-        >
-          {stats.map((stat) => (
-            <div key={stat.label}>
-              <span className="text-fg-primary font-mono text-2xl font-bold tabular-nums">
-                {stat.value}
-              </span>
-              <span className="text-fg-tertiary mt-0.5 block text-xs tracking-wide uppercase">
-                {stat.label}
-              </span>
-            </div>
-          ))}
         </motion.div>
       </motion.div>
 

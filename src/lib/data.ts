@@ -113,7 +113,7 @@ export const projects: Project[] = [
     ],
     featured: true,
     links: {
-      github: "https://github.com/DevFurqanAI/affinity_hub",
+      github: "https://github.com/DevFurqanAI",
       live: "https://affinity-hub-liart.vercel.app/",
     },
   },
@@ -220,9 +220,39 @@ export const education: EducationInfo = {
 };
 
 export const certificates: Certificate[] = [
-  { issuer: "Microsoft", title: "Relational Database Design and Advanced Querying" },
-  { issuer: "Microsoft", title: "SQL Foundations" },
-  { issuer: "Meta", title: "Database Structures and Management with MySQL" },
-  { issuer: "Meta", title: "Version Control" },
-  { issuer: "Google", title: "Foundations of Project Management" },
+  {
+    issuer: "HackerRank",
+    title: "Software Engineer — Role Certification",
+    verifyUrl: "https://www.hackerrank.com/certificates/f002360f44a0",
+  },
+  {
+    issuer: "Microsoft",
+    title: "SQL Foundations",
+    verifyUrl: "https://coursera.org/verify/0I89MV1P25ZI",
+  },
+  {
+    issuer: "Microsoft",
+    title: "Relational Database Design and Advanced Querying",
+    verifyUrl: "https://coursera.org/verify/PW6DFL11SAW9",
+  },
+  {
+    issuer: "Microsoft",
+    title: "Data Manipulation and Transactions in SQL Server",
+    verifyUrl: "https://coursera.org/verify/AUU0DM4BWROB",
+  },
+  {
+    issuer: "Meta",
+    title: "Introduction to Databases",
+    verifyUrl: "https://coursera.org/verify/BM8DEDAR8L2V",
+  },
+  {
+    issuer: "Meta",
+    title: "Database Structures and Management with MySQL",
+    verifyUrl: "https://coursera.org/verify/PT4XQOVCWVL6",
+  },
+  {
+    issuer: "Meta",
+    title: "Version Control",
+    verifyUrl: "https://coursera.org/verify/YVAPYXR3UTJ5",
+  },
 ];

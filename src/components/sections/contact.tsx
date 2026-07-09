@@ -9,7 +9,6 @@ import { TextReveal } from "@/components/motion/TextReveal";
 
 const Mail = getIcon("mail");
 const Phone = getIcon("phone");
-const MapPin = getIcon("mapPin");
 const ArrowRight = getIcon("arrowRight");
 
 export function Contact() {
@@ -47,7 +46,7 @@ export function Contact() {
 
           <TextReveal
             as="h2"
-            text="Let's build something together"
+            text="Get in touch"
             className="text-fg-primary max-w-2xl text-3xl leading-tight font-bold tracking-tight sm:text-4xl"
           />
 
@@ -55,11 +54,11 @@ export function Contact() {
             variants={fadeUp}
             className="text-fg-secondary mt-4 max-w-xl text-base leading-7"
           >
-            I&apos;m open to internship opportunities, collaboration, and professional
-            networking. The fastest way to reach me is email.
+            Open to backend and full-stack internship opportunities. Email is the
+            fastest way to reach me — I check it daily.
           </motion.p>
 
-          <motion.div variants={fadeUp} className="mt-12 grid gap-4 sm:grid-cols-3">
+          <motion.div variants={fadeUp} className="mt-12 grid gap-4 sm:grid-cols-2">
             <button
               onClick={handleCopyEmail}
               className="border-border-hairline hover:border-border-hairline-strong hover:bg-bg-elevated group flex flex-col items-start rounded-2xl border p-6 text-left transition-colors"
@@ -68,9 +67,12 @@ export function Contact() {
                 <Mail className="h-5 w-5" />
               </div>
               <span className="text-fg-tertiary font-mono mt-4 text-xs uppercase">
-                Email
+                Email · click to copy
               </span>
-              <span className="text-fg-primary mt-1 text-sm font-medium break-all">
+              <span
+                className="text-fg-primary mt-1 text-sm font-medium break-all"
+                aria-live="polite"
+              >
                 {copied ? "Copied to clipboard" : contact.email}
               </span>
             </button>
@@ -89,18 +91,6 @@ export function Contact() {
                 {contact.phone}
               </span>
             </a>
-
-            <div className="border-border-hairline flex flex-col items-start rounded-2xl border p-6">
-              <div className="bg-brand/10 text-brand flex h-10 w-10 items-center justify-center rounded-xl">
-                <MapPin className="h-5 w-5" />
-              </div>
-              <span className="text-fg-tertiary font-mono mt-4 text-xs uppercase">
-                Location
-              </span>
-              <span className="text-fg-primary mt-1 text-sm font-medium">
-                {contact.location}
-              </span>
-            </div>
           </motion.div>
 
           <motion.div

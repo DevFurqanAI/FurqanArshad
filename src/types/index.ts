@@ -40,6 +40,7 @@ export interface EducationInfo {
 export interface Certificate {
   issuer: string;
   title: string;
+  verifyUrl?: string;
 }
 
 export interface SocialLink {
