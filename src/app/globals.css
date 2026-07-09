@@ -106,6 +106,21 @@
 
   /* Motion easing (used directly in inline styles / Framer configs, not a Tailwind color) */
   --ease-expo-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Real rendered height of the sticky header (py-4 top/bottom + 40px logo/
+     button row + 1px border ≈ 73px), rounded up for breathing room. Lenis
+     reads this value directly (it computes getComputedStyle(html).scrollPaddingTop
+     internally), as does native scrollIntoView/hash navigation — so this is
+     the single source of truth for header-clearance offset. Do NOT also pass
+     a manual `offset` in lenis.scrollTo() calls; Lenis already subtracts this
+     automatically and the two will stack.
+
+     Set to 0 because every section except Hero already has enough top
+     padding (py-24/py-32) to absorb the header overlap on its own — adding
+     scroll-padding-top here on top of that padding was overcorrecting and
+     undershooting the jump target. Hero has no such padding, so it gets its
+     own scroll-margin-top below instead of forcing this value site-wide. */
+  --header-height: 0px;
 }
 
 /* Dark is our default and only theme for now (light mode is a later phase) */
@@ -162,6 +177,15 @@
   }
   html {
     @apply font-sans;
+    scroll-padding-top: var(--header-height);
+  }
+  /* Hero (#home) has no top padding buffer like other sections (py-24/py-32),
+     so unlike them it needs its own header-clearance reserved directly on
+     the target element instead of the global scroll-padding-top above.
+     Lenis subtracts this independently of scroll-padding-top, and native
+     scrollIntoView/hash navigation honor it too. */
+  #home {
+    scroll-margin-top: 80px;
   }
   /* Consistent, visible focus ring for keyboard navigation across the whole site */
   :focus-visible {

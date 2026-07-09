@@ -9,6 +9,7 @@ export interface Project {
   title: string;
   year: string;
   status?: string; // e.g. "In development"
+  context: string; // honest framing, e.g. "Personal project · live" or "Coursework · Networks"
   stack: string[];
   description: string;
   highlights: string[];

@@ -36,6 +36,10 @@ export function FeaturedProject({ project }: { project: Project }) {
             {project.title}
           </h3>
 
+          <p className="text-fg-tertiary font-mono mt-2 text-xs tracking-wide uppercase">
+            {project.context}
+          </p>
+
           <p className="text-fg-secondary mt-4 max-w-xl leading-7">
             {project.description}
           </p>

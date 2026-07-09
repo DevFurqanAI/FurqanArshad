@@ -12,7 +12,7 @@ export const personal = {
   name: "Muhammad Furqan Arshad",
   role: "Software Developer",
   summary:
-    "Computer Science undergraduate with hands-on experience across full-stack web development (MERN), desktop/database applications (C#, SQL Server), data structures, and networking. Seeking a software development role to apply and grow these skills in a production environment.",
+    "I build systems, not just interfaces — full-stack apps with real auth and moderation, desktop tools backed by properly normalized databases, and network infrastructure with redundant routing. I care about what's underneath the API call.",
 };
 
 export const contact: ContactInfo = {
@@ -99,73 +99,79 @@ export const projects: Project[] = [
     slug: "affinity-hub",
     title: "Affinity Hub",
     year: "2026",
-    status: "Completed",
+    status: "Live",
+    context: "Personal project · live in production",
     stack: ["MongoDB", "Express.js", "React", "Node.js", "Cloudinary"],
     description:
-      "A full-stack social media platform with authentication, profiles, posts, stories, likes, and comments, built around a secure API layer and an admin moderation system.",
+      "A social platform I built to actually deal with the unglamorous half of social apps — abuse and spam — not just the feed. Auth had to resist bot signups without adding friction, and moderation had to give admins real leverage over reported content instead of a blunt ban button.",
     highlights: [
-      "JWT authentication with Google OAuth, email OTP verification, and role-based authorization",
-      "Scalable REST APIs using Node.js, Express.js, MongoDB, and Mongoose",
-      "Cloudinary, Brevo API, and Cloudflare Turnstile integrated for media, email, and security",
-      "Responsive React + Vite + Tailwind frontend with dark/light themes and an admin dashboard for reports, bans, and suspensions",
-      "Deployed via Vercel (frontend) and Render (backend)",
+      "Layered signup with Google OAuth, email OTP, and Cloudflare Turnstile — added after the first version let spam accounts straight into the feed",
+      "Role-based authorization so moderation actions (reports, bans, suspensions) are auditable and reversible, not just a delete button",
+      "Mongoose schemas designed around read-heavy feed queries, since posts/likes/comments are read far more than written",
+      "Cloudinary for media so the API layer never touches raw uploads directly",
+      "Split deploy — Vercel frontend, Render backend — so each scales independently",
     ],
     featured: true,
     links: {
       github: "https://github.com/DevFurqanAI",
+      live: "https://affinity-hub-liart.vercel.app/",
     },
   },
   {
     slug: "fiberlink-isp-network",
     title: "FiberLink Regional ISP Network",
     year: "2026",
+    context: "Coursework · Computer Networks",
     stack: ["Cisco Packet Tracer", "OSPF", "VLSM/VLAN", "ACL"],
     description:
-      "A multi-city ISP network design serving residential, corporate, and hospital customer segments with redundant backbone routing.",
+      "A network design exercise I treated like a real ISP brief: three customer segments (residential, corporate, hospital) with different uptime and security needs sharing one backbone. The interesting part was subnetting efficiently across 20+ networks without wasting address space, and making sure one segment's failure couldn't take down another's routing.",
     highlights: [
-      "Multi-city topology with redundant backbone routing across customer segments",
-      "VLSM/VLAN addressing and OSPF routing configured across 20+ subnets",
-      "DHCP/DNS/NAT and ACL-based security policies",
-      "Verified connectivity and access control through systematic testing",
+      "VLSM addressing sized to each segment's actual host count instead of flat /24s across the board",
+      "OSPF with redundant backbone links so a single link failure doesn't isolate a city",
+      "ACLs scoped per segment — hospital traffic isolated from residential/corporate by policy, not just topology",
+      "Verified every path and access rule with systematic ping/traceroute testing, not just visual inspection",
     ],
   },
   {
     slug: "real-estate-management-system",
     title: "Real Estate Management System",
     year: "2025",
+    context: "Coursework · Team project",
     stack: ["C#", "WPF", "ASP.NET", "SQL Server"],
     description:
-      "Desktop and web-based modules for managing plots, projects, and customers with authentication and full CRUD operations.",
+      "A team project managing plots, projects, and customers across a desktop app and a web interface sharing one SQL Server backend. The real constraint was schema design — plots belong to projects, projects have customers, and getting that relational structure wrong early would have broken both interfaces later.",
     highlights: [
-      "Authentication and full CRUD operations across desktop and web interfaces",
-      "Structured XAML (WPF) and ASP.NET interfaces backed by SQL Server",
-      "Normalized relational schema supporting projects, plots, and customer records",
+      "Normalized schema first, UI second — plots/projects/customers modeled as proper foreign-key relationships, not flat tables",
+      "Full CRUD and authentication built once in the data layer, consumed by both the WPF desktop client and the ASP.NET web client",
+      "XAML interfaces structured to stay in sync with backend validation instead of duplicating rules client-side",
     ],
   },
   {
     slug: "flight-management-system",
     title: "Flight Management System",
     year: "2025",
+    context: "Coursework · Database Systems",
     stack: ["C#", "Windows Forms", "SQL Server"],
     description:
-      "A database-driven flight management system with role-based authentication for Admin and Employee users.",
+      "A flight-booking system where the actual work was in the database, not the form — enforcing business rules like seat limits and role restrictions at the SQL Server layer with triggers and constraints, so bad data couldn't get in even from a buggy client.",
     highlights: [
-      "Role-based authentication for Admin and Employee modules",
-      "SQL Server backend using stored procedures, triggers, and relational schema design",
-      "Optimized queries and enforced business logic through constraints",
+      "Business logic enforced via constraints and triggers at the database layer, not just UI validation",
+      "Role-based auth splitting Admin and Employee capabilities at the query level",
+      "Query optimization pass after the first schema made common lookups too slow",
     ],
   },
   {
     slug: "search-engine-simulator",
     title: "Search Engine Auto-Complete & Web Crawler Simulator",
     year: "2025",
+    context: "Coursework · Data Structures",
     stack: ["C++", "AVL Tree", "Trie", "Heap", "Queue", "Stack"],
     description:
-      "A search engine simulation integrating a web crawler, keyword indexing, prefix search, and relevance ranking.",
+      "Built to prove I understand why these data structures exist, not just how to implement them — a BFS crawler feeds an AVL-indexed keyword store, a Trie handles prefix autocomplete, and a max-heap ranks results by relevance. Three different structures, each chosen because it was the right fit for that specific access pattern.",
     highlights: [
-      "BFS-based web crawler with AVL tree-based keyword indexing",
-      "Trie-based prefix search for real-time auto-complete suggestions",
-      "Max Heap-based ranking system for relevance scoring",
+      "AVL tree keeps keyword lookups balanced and fast as the crawled index grows",
+      "Trie-based prefix search returns autocomplete suggestions in real time",
+      "Max-heap ranking so results surface by relevance instead of crawl order",
     ],
   },
 ];
@@ -181,7 +187,7 @@ export const experience: ExperienceItem[] = [
       "Applied software engineering principles to build scalable and maintainable systems",
       "Collaborated in team-based academic projects",
     ],
-    iconKey: "briefcase",
+    iconKey: "code",
   },
   {
     role: "Head of Community Administration",
@@ -193,7 +199,7 @@ export const experience: ExperienceItem[] = [
       "Drove process improvements that boosted member retention",
       "Developed communication and coordination skills in a remote environment",
     ],
-    iconKey: "badge",
+    iconKey: "users",
   },
 ];
 

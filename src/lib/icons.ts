@@ -12,11 +12,12 @@ import {
   LuMapPin,
   LuDownload,
   LuArrowRight,
+  LuArrowUp,
   LuExternalLink,
   LuMenu,
   LuX,
-  LuSun,
-  LuMoon,
+  LuChevronDown,
+  LuUsers,
 } from "react-icons/lu";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa6";
 import type { IconType } from "react-icons";
@@ -35,11 +36,12 @@ export const icons: Record<string, IconType> = {
   mapPin: LuMapPin,
   download: LuDownload,
   arrowRight: LuArrowRight,
+  arrowUp: LuArrowUp,
   externalLink: LuExternalLink,
   menu: LuMenu,
   close: LuX,
-  sun: LuSun,
-  moon: LuMoon,
+  chevronDown: LuChevronDown,
+  users: LuUsers,
   github: FaGithub,
   linkedin: FaLinkedinIn,
 };

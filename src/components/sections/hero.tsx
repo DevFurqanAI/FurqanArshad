@@ -1,13 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { personal, contact } from "@/lib/data";
+import { personal, contact, projects, education } from "@/lib/data";
 import { getIcon } from "@/lib/icons";
 import { EASE_EXPO_OUT } from "@/lib/animations";
 import { NodeNetwork } from "@/components/motion/NodeNetwork";
+import { getLenis } from "@/components/providers/smooth-scroll-provider";
 
 const ArrowRight = getIcon("arrowRight");
 const Download = getIcon("download");
+const MapPin = getIcon("mapPin");
+const ChevronDown = getIcon("chevronDown");
 
 const container = {
   hidden: {},
@@ -49,11 +52,41 @@ function RevealWords({ text, className }: { text: string; className?: string }) 
   );
 }
 
+const stats = [
+  { value: String(projects.length), label: "shipped projects" },
+  { value: education.cgpa.split(" / ")[0], label: "CGPA" },
+  { value: "MERN", label: "primary stack" },
+];
+
 export function Hero() {
+  function scrollToAbout(e: React.MouseEvent<HTMLAnchorElement>) {
+    e.preventDefault();
+    const el = document.getElementById("about");
+    if (!el) return;
+
+    window.dispatchEvent(new Event("portfolio:navjumpstart"));
+
+    function release() {
+      window.dispatchEvent(new Event("portfolio:navjumpend"));
+    }
+
+    const lenis = getLenis();
+    if (lenis) {
+      lenis.scrollTo(el, {
+        duration: 1.2,
+        easing: (t: number) => 1 - Math.pow(1 - t, 3),
+        onComplete: release,
+      });
+    } else {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      release();
+    }
+  }
+
   return (
     <section
       id="home"
-      className="relative flex min-h-[92vh] flex-col justify-center overflow-hidden px-4 sm:px-6 lg:px-8"
+      className="relative flex min-h-[88vh] flex-col justify-center overflow-hidden px-4 sm:px-6 lg:px-8"
     >
       <NodeNetwork />
       {/* Background texture: fine grid + soft radial glow */}
@@ -79,12 +112,22 @@ export function Hero() {
         animate="visible"
         className="mx-auto w-full max-w-5xl"
       >
-        <motion.p
-          variants={fadeUp}
-          className="text-brand font-mono mb-6 text-xs tracking-[0.25em] uppercase"
-        >
-          ~/{contact.location.split(",")[0].toLowerCase()} · available for internships
-        </motion.p>
+        <motion.div variants={fadeUp} className="mb-6 flex flex-wrap items-center gap-3">
+          <span className="border-border-hairline-strong bg-bg-elevated/60 inline-flex items-center gap-2 rounded-full border px-3 py-1">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="bg-brand absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" />
+              <span className="bg-brand relative inline-flex h-1.5 w-1.5 rounded-full" />
+            </span>
+            <span className="text-fg-primary font-mono text-[11px] tracking-[0.15em] uppercase">
+              Open to backend & full-stack internships
+            </span>
+          </span>
+
+          <span className="text-fg-tertiary font-mono inline-flex items-center gap-1.5 text-[11px] tracking-[0.15em] uppercase">
+            <MapPin className="h-3 w-3" />
+            {contact.location}
+          </span>
+        </motion.div>
 
         <h1 className="text-fg-primary text-4xl leading-[1.05] font-bold tracking-tight sm:text-6xl lg:text-7xl">
           <RevealWords text="Muhammad Furqan" />
@@ -116,7 +159,41 @@ export function Hero() {
             <Download className="h-4 w-4" />
           </a>
         </motion.div>
+
+        <motion.div
+          variants={fadeUp}
+          className="border-border-hairline mt-14 flex max-w-md flex-wrap gap-x-10 gap-y-4 border-t pt-6"
+        >
+          {stats.map((stat) => (
+            <div key={stat.label}>
+              <span className="text-fg-primary font-mono text-2xl font-bold tabular-nums">
+                {stat.value}
+              </span>
+              <span className="text-fg-tertiary mt-0.5 block text-xs tracking-wide uppercase">
+                {stat.label}
+              </span>
+            </div>
+          ))}
+        </motion.div>
       </motion.div>
+
+      <motion.a
+        href="#about"
+        onClick={scrollToAbout}
+        variants={fadeUp}
+        initial="hidden"
+        animate="visible"
+        aria-label="Scroll to About section"
+        className="text-fg-tertiary hover:text-brand absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 transition-colors md:flex"
+      >
+        <span className="font-mono text-[10px] tracking-[0.2em] uppercase">Scroll</span>
+        <motion.span
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ChevronDown className="h-4 w-4" />
+        </motion.span>
+      </motion.a>
     </section>
   );
 }

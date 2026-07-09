@@ -15,6 +15,10 @@ export function ProjectCard({ project }: { project: Project }) {
             <span className="text-fg-tertiary font-mono shrink-0 text-xs">{project.year}</span>
           </div>
 
+          <p className="text-fg-tertiary font-mono mt-1.5 text-[11px] tracking-wide uppercase">
+            {project.context}
+          </p>
+
           <p className="text-fg-secondary mt-3 flex-1 text-sm leading-7">
             {project.description}
           </p>

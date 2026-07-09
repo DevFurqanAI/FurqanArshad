@@ -2,9 +2,10 @@
 
 import { motion } from "framer-motion";
 import { skillGroups } from "@/lib/data";
-import { getIcon } from "@/lib/icons";
 import { fadeUp, staggerContainer, scrollViewport } from "@/lib/animations";
 import { TextReveal } from "@/components/motion/TextReveal";
+
+const totalSkills = skillGroups.reduce((sum, g) => sum + g.items.length, 0);
 
 export function Skills() {
   return (
@@ -18,48 +19,66 @@ export function Skills() {
           whileInView="visible"
           viewport={scrollViewport}
           variants={staggerContainer(0.08)}
+          className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_1.6fr] lg:gap-16"
         >
-          <motion.p
-            variants={fadeUp}
-            className="text-brand font-mono mb-4 text-xs tracking-[0.25em] uppercase"
-          >
-            Skills
-          </motion.p>
+          {/* Sticky intro column */}
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <motion.p
+              variants={fadeUp}
+              className="text-brand font-mono mb-4 text-xs tracking-[0.25em] uppercase"
+            >
+              Skills
+            </motion.p>
 
-          <TextReveal
-            as="h2"
-            text="Technologies and concepts I build with"
-            className="text-fg-primary max-w-2xl text-3xl leading-tight font-bold tracking-tight sm:text-4xl"
-          />
+            <TextReveal
+              as="h2"
+              text="Technologies and concepts I build with"
+              className="text-fg-primary max-w-md text-3xl leading-tight font-bold tracking-tight sm:text-4xl"
+            />
 
-          <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {skillGroups.map((group) => {
-              const Icon = getIcon(group.iconKey);
-              return (
-                <motion.div
-                  key={group.title}
-                  variants={fadeUp}
-                  className="border-border-hairline hover:border-border-hairline-strong rounded-2xl border p-6 transition-colors"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="bg-brand/10 text-brand flex h-10 w-10 items-center justify-center rounded-xl">
-                      <Icon className="h-5 w-5" />
-                    </div>
-                    <h3 className="text-fg-primary font-semibold">{group.title}</h3>
-                  </div>
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {group.items.map((item) => (
-                      <span
-                        key={item}
-                        className="text-fg-secondary bg-bg-elevated font-mono rounded-md px-2.5 py-1 text-xs"
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </motion.div>
-              );
-            })}
+            <motion.p variants={fadeUp} className="text-fg-secondary mt-6 max-w-sm text-sm leading-7">
+              A working toolkit spanning the full stack, plus the systems and
+              CS fundamentals underneath it.
+            </motion.p>
+
+            <motion.div variants={fadeUp} className="border-border-hairline mt-10 flex items-baseline gap-3 border-t pt-6">
+              <span className="text-fg-primary font-mono text-4xl font-bold tabular-nums">
+                {totalSkills}
+              </span>
+              <span className="text-fg-tertiary text-xs leading-tight">
+                tools &amp; concepts
+                <br />
+                across {skillGroups.length} categories
+              </span>
+            </motion.div>
+          </div>
+
+          {/* Flowing category list — divided by hairlines, no boxed grid */}
+          <div className="border-border-hairline border-t">
+            {skillGroups.map((group, i) => (
+              <motion.div
+                key={group.title}
+                variants={fadeUp}
+                className="border-border-hairline group grid grid-cols-[2.5rem_1fr] gap-x-4 gap-y-4 border-b py-7 sm:grid-cols-[3rem_9rem_1fr] sm:gap-x-8"
+              >
+                <span className="text-fg-tertiary font-mono text-xs">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="text-fg-primary col-start-2 text-sm font-semibold">
+                  {group.title}
+                </h3>
+                <div className="col-span-2 flex flex-wrap gap-2 sm:col-span-1 sm:col-start-3">
+                  {group.items.map((item) => (
+                    <span
+                      key={item}
+                      className="text-fg-secondary bg-bg-elevated group-hover:border-border-hairline-strong border border-transparent font-mono rounded-md px-2.5 py-1 text-xs transition-colors"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
       </div>
