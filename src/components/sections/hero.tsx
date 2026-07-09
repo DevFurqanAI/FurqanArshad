@@ -58,22 +58,14 @@ export function Hero() {
     const el = document.getElementById("about");
     if (!el) return;
 
-    window.dispatchEvent(new Event("portfolio:navjumpstart"));
-
-    function release() {
-      window.dispatchEvent(new Event("portfolio:navjumpend"));
-    }
-
     const lenis = getLenis();
     if (lenis) {
       lenis.scrollTo(el, {
         duration: 1.2,
         easing: (t: number) => 1 - Math.pow(1 - t, 3),
-        onComplete: release,
       });
     } else {
       el.scrollIntoView({ behavior: "smooth", block: "start" });
-      release();
     }
   }
 

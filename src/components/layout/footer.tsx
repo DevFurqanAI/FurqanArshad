@@ -13,22 +13,14 @@ export function Footer() {
     const el = document.getElementById("home");
     if (!el) return;
 
-    window.dispatchEvent(new Event("portfolio:navjumpstart"));
-
-    function release() {
-      window.dispatchEvent(new Event("portfolio:navjumpend"));
-    }
-
     const lenis = getLenis();
     if (lenis) {
       lenis.scrollTo(el, {
         duration: 1.4,
         easing: (t: number) => 1 - Math.pow(1 - t, 3),
-        onComplete: release,
       });
     } else {
       el.scrollIntoView({ behavior: "smooth", block: "start" });
-      release();
     }
   }
 
@@ -41,8 +33,8 @@ export function Footer() {
               Muhammad Furqan Arshad
             </p>
             <p className="text-fg-secondary mt-2 max-w-sm text-sm leading-6">
-              Thanks for scrolling this far. Open to internships,
-              collaboration, and a good technical conversation.
+              Open to backend and full-stack internship opportunities —
+              always up for a good technical conversation.
             </p>
           </div>
 
@@ -57,7 +49,7 @@ export function Footer() {
         </div>
 
         <div className="border-border-hairline text-fg-tertiary font-mono mt-10 border-t pt-6 text-xs">
-          © {year} Muhammad Furqan Arshad · Built from scratch with Next.js
+          © {year} Muhammad Furqan Arshad
         </div>
       </div>
     </footer>

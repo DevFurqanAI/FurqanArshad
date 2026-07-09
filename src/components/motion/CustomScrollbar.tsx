@@ -48,18 +48,11 @@ export function CustomScrollbar() {
     const el = document.getElementById(id);
     if (!el) return;
 
-    window.dispatchEvent(new Event("portfolio:navjumpstart"));
-
-    function release() {
-      window.dispatchEvent(new Event("portfolio:navjumpend"));
-    }
-
     const lenis = getLenis();
     if (lenis) {
-      lenis.scrollTo(el, { onComplete: release });
+      lenis.scrollTo(el);
     } else {
       el.scrollIntoView({ behavior: "smooth", block: "start" });
-      release();
     }
   }
 

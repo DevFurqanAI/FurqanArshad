@@ -48,14 +48,13 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    title: "Backend & Desktop",
+    title: "Backend, Databases & Desktop",
     iconKey: "server",
-    items: ["C#", "ASP.NET", "WPF", "Windows Forms", "Authentication Systems"],
-  },
-  {
-    title: "Databases",
-    iconKey: "database",
     items: [
+      "C#",
+      "ASP.NET",
+      "WPF",
+      "Windows Forms",
       "SQL Server",
       "MongoDB",
       "Mongoose",
@@ -65,7 +64,7 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    title: "Systems & Networking",
+    title: "Networking & Systems Fundamentals",
     iconKey: "network",
     items: [
       "Cisco Packet Tracer",
@@ -73,24 +72,16 @@ export const skillGroups: SkillGroup[] = [
       "VLSM/VLAN Addressing",
       "DHCP/DNS/NAT",
       "ACL Security",
-    ],
-  },
-  {
-    title: "Core Concepts",
-    iconKey: "layers",
-    items: [
       "Data Structures",
       "AVL Trees",
       "Tries",
       "Heaps",
-      "Software Engineering",
-      "System Design",
     ],
   },
   {
-    title: "Tools & Platforms",
+    title: "Tools",
     iconKey: "tools",
-    items: ["Git", "GitHub", "Vercel", "Render", "Visual Studio", "SSMS"],
+    items: ["Git", "GitHub", "Visual Studio", "SSMS"],
   },
 ];
 

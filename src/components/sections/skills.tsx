@@ -5,8 +5,6 @@ import { skillGroups } from "@/lib/data";
 import { fadeUp, staggerContainer, scrollViewport } from "@/lib/animations";
 import { TextReveal } from "@/components/motion/TextReveal";
 
-const totalSkills = skillGroups.reduce((sum, g) => sum + g.items.length, 0);
-
 export function Skills() {
   return (
     <section
@@ -40,17 +38,6 @@ export function Skills() {
               A working toolkit spanning the full stack, plus the systems and
               CS fundamentals underneath it.
             </motion.p>
-
-            <motion.div variants={fadeUp} className="border-border-hairline mt-10 flex items-baseline gap-3 border-t pt-6">
-              <span className="text-fg-primary font-mono text-4xl font-bold tabular-nums">
-                {totalSkills}
-              </span>
-              <span className="text-fg-tertiary text-xs leading-tight">
-                tools &amp; concepts
-                <br />
-                across {skillGroups.length} categories
-              </span>
-            </motion.div>
           </div>
 
           {/* Flowing category list — divided by hairlines, no boxed grid */}
