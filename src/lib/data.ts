@@ -104,7 +104,7 @@ export const projects: Project[] = [
     ],
     featured: true,
     links: {
-      github: "https://github.com/DevFurqanAI",
+      github: "https://github.com/DevFurqanAI/affinity_hub",
       live: "https://affinity-hub-liart.vercel.app/",
     },
   },

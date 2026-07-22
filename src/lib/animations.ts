@@ -1,4 +1,4 @@
-import type { Variants } from "framer-motion";
+import type { Transition, Variants } from "framer-motion";
 
 // Matches --ease-expo-out in globals.css — keep these in sync if you change one
 export const EASE_EXPO_OUT: [number, number, number, number] = [0.16, 1, 0.3, 1];
@@ -8,6 +8,18 @@ export const DURATION = {
   base: 0.3,
   slow: 0.6,
 } as const;
+
+/**
+ * Spring configs — used for anything that should feel physically "alive"
+ * (magnetic elements, cursor follow, tilt release, drag-back), as opposed
+ * to the ease-based entrance transitions below.
+ */
+export const SPRING_SOFT: Transition = {
+  type: "spring",
+  stiffness: 200,
+  damping: 25,
+  mass: 0.8,
+};
 
 /** Fade + rise — the default entrance for most content blocks */
 export const fadeUp: Variants = {

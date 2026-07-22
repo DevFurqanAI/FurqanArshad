@@ -48,7 +48,10 @@ export function Footer() {
           </a>
         </div>
 
-        <div className="border-border-hairline text-fg-tertiary font-mono mt-10 border-t pt-6 text-xs">
+        <div
+          className="border-border-hairline text-fg-tertiary font-mono mt-10 border-t pt-6 text-xs"
+          suppressHydrationWarning
+        >
           © {year} Muhammad Furqan Arshad
         </div>
       </div>

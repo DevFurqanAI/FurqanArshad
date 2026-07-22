@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { getIcon } from "@/lib/icons";
 import { EASE_EXPO_OUT } from "@/lib/animations";
@@ -28,6 +28,27 @@ const menuItem = {
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeId, setActiveId] = useState<string>("home");
+  const headerRef = useRef<HTMLElement>(null);
+
+  // Close the mobile menu on Escape or on an outside click/tap.
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") setMenuOpen(false);
+    }
+    function handlePointerDown(e: PointerEvent) {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
+        setMenuOpen(false);
+      }
+    }
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("pointerdown", handlePointerDown);
+    };
+  }, [menuOpen]);
 
   function jumpTo(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
     e.preventDefault();
@@ -69,7 +90,10 @@ export function Header() {
   }, []);
 
   return (
-    <motion.header className="border-border-hairline bg-background/80 sticky top-0 z-50 border-b backdrop-blur-xl">
+    <motion.header
+      ref={headerRef}
+      className="border-border-hairline bg-background/80 sticky top-0 z-50 border-b backdrop-blur-xl"
+    >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         <a
           href="#home"

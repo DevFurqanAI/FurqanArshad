@@ -84,7 +84,7 @@ export function FeaturedProject({ project }: { project: Project }) {
         <ul className="space-y-4">
           {project.highlights.map((point, i) => (
             <li key={point} className="flex items-start gap-4">
-              <span className="text-brand font-mono pt-0.51 text-xs leading-7">
+              <span className="text-brand font-mono pt-0.5 text-xs leading-7">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <span className="text-fg-secondary text-sm leading-7">{point}</span>

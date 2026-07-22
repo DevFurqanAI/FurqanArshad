@@ -37,16 +37,17 @@ export function NodeNetwork() {
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
-    const width = container.clientWidth;
-    const height = container.clientHeight;
+    let width = container.clientWidth;
+    let height = container.clientHeight;
 
     // Scale factor: how much bigger/smaller this container is than the
     // reference box the interaction constants were tuned against.
-    const scale =
-      (width / REFERENCE_WIDTH + height / REFERENCE_HEIGHT) / 2;
-    const edgeDistanceThreshold = EDGE_DISTANCE_THRESHOLD_BASE * scale;
-    const mouseInfluenceRadius = MOUSE_INFLUENCE_RADIUS_BASE * scale;
-    const wanderRadius = WANDER_RADIUS_BASE * scale;
+    // Recomputed on resize below, so these stay mutable rather than
+    // frozen at their initial mount-time values.
+    let scale = (width / REFERENCE_WIDTH + height / REFERENCE_HEIGHT) / 2;
+    let edgeDistanceThreshold = EDGE_DISTANCE_THRESHOLD_BASE * scale;
+    let mouseInfluenceRadius = MOUSE_INFLUENCE_RADIUS_BASE * scale;
+    let wanderRadius = WANDER_RADIUS_BASE * scale;
 
     const nodes: NetworkNode[] = Array.from({ length: NODE_COUNT }, () => {
       const x = 30 + Math.random() * (width - 60);
@@ -145,6 +146,27 @@ export function NodeNetwork() {
     container.addEventListener("mousemove", handleMouseMove);
     container.addEventListener("mouseleave", handleMouseLeave);
 
+    // Keep dimensions/thresholds in sync with the container instead of
+    // freezing them at mount — otherwise resizing the window leaves nodes
+    // tuned to (and clamped against) stale bounds.
+    function handleResize() {
+      width = container!.clientWidth;
+      height = container!.clientHeight;
+      scale = (width / REFERENCE_WIDTH + height / REFERENCE_HEIGHT) / 2;
+      edgeDistanceThreshold = EDGE_DISTANCE_THRESHOLD_BASE * scale;
+      mouseInfluenceRadius = MOUSE_INFLUENCE_RADIUS_BASE * scale;
+      wanderRadius = WANDER_RADIUS_BASE * scale;
+
+      nodes.forEach((n) => {
+        n.x = Math.max(20, Math.min(width - 20, n.x));
+        n.y = Math.max(15, Math.min(height - 15, n.y));
+        pickNewTarget(n);
+      });
+      recomputeEdges();
+    }
+    const resizeObserver = new ResizeObserver(handleResize);
+    resizeObserver.observe(container);
+
     let t = 0;
     let rafId: number;
     let isPaused = document.visibilityState !== "visible";
@@ -193,7 +215,9 @@ export function NodeNetwork() {
         const dist = Math.sqrt(dx * dx + dy * dy);
         const glow = hasMouse
           ? Math.max(0.4, 1 - dist / (200 * scale))
-          : 0.4 + 0.15 * Math.sin(t * 2 + i);
+          : prefersReducedMotion
+            ? 0.4
+            : 0.4 + 0.15 * Math.sin(t * 2 + i);
         el.setAttribute("opacity", glow.toFixed(2));
       });
 
@@ -217,7 +241,9 @@ export function NodeNetwork() {
           : 999;
         const glow = hasMouse
           ? Math.max(0.12, 0.35 - midDist / (500 * scale))
-          : 0.15 + 0.08 * Math.sin(t * 1.5 + i);
+          : prefersReducedMotion
+            ? 0.15
+            : 0.15 + 0.08 * Math.sin(t * 1.5 + i);
         el.setAttribute("opacity", glow.toFixed(2));
       });
 
@@ -228,6 +254,7 @@ export function NodeNetwork() {
     return () => {
       cancelAnimationFrame(rafId);
       if (edgeInterval) window.clearInterval(edgeInterval);
+      resizeObserver.disconnect();
       container.removeEventListener("mousemove", handleMouseMove);
       container.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
